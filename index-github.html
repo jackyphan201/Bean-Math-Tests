@@ -1,0 +1,2401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grade 10 Mathematics Diagnostic</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <style>
+    :root {
+      --bg: #f4f7ff;
+      --panel: rgba(255, 255, 255, 0.9);
+      --panel-strong: #ffffff;
+      --text: #1f2a44;
+      --muted: #667189;
+      --primary: #5b6cff;
+      --primary-dark: #4453d9;
+      --accent: #ff9f6e;
+      --accent-soft: #fff1e8;
+      --success: #2f9e73;
+      --success-soft: #e7f8f0;
+      --warning: #d97706;
+      --warning-soft: #fff3da;
+      --danger: #d9485f;
+      --danger-soft: #ffe9ee;
+      --border: #dfe6fb;
+      --shadow: 0 20px 45px rgba(74, 98, 166, 0.12);
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(91, 108, 255, 0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(255, 159, 110, 0.18), transparent 28%),
+        linear-gradient(180deg, #eef3ff 0%, #f8fbff 45%, #f4f7ff 100%);
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    .app-shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 48px;
+    }
+
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 38px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-card::before,
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-card::before {
+      width: 220px;
+      height: 220px;
+      top: -90px;
+      right: -60px;
+      background: rgba(91, 108, 255, 0.12);
+    }
+
+    .hero-card::after {
+      width: 150px;
+      height: 150px;
+      bottom: -70px;
+      left: -40px;
+      background: rgba(255, 159, 110, 0.12);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #edf1ff;
+      color: var(--primary-dark);
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.15;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .hero-title {
+      margin-top: 18px;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      max-width: 14ch;
+    }
+
+    .hero-copy {
+      margin-top: 14px;
+      max-width: 62ch;
+      font-size: 1.05rem;
+    }
+
+    .welcome-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr;
+      gap: 24px;
+      align-items: stretch;
+      margin-top: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .panel {
+      background: var(--panel-strong);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 22px;
+    }
+
+    .feature-list,
+    .topic-overview-list,
+    .summary-list {
+      display: grid;
+      gap: 14px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .feature-item,
+    .topic-row,
+    .summary-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: #fbfcff;
+    }
+
+    .feature-item strong,
+    .topic-row strong,
+    .summary-item strong {
+      color: var(--text);
+    }
+
+    .feature-pill {
+      flex-shrink: 0;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #a9561d;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .topic-count {
+      flex-shrink: 0;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: var(--primary-dark);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 20px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+      opacity: 0.58;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn:focus-visible {
+      outline: 3px solid rgba(91, 108, 255, 0.22);
+      outline-offset: 2px;
+    }
+
+    .btn-primary {
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--primary), #7d8cff);
+      box-shadow: 0 16px 30px rgba(91, 108, 255, 0.24);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    }
+
+    .btn-secondary {
+      color: var(--primary-dark);
+      background: #edf1ff;
+    }
+
+    .btn-ghost {
+      color: var(--text);
+      background: #ffffff;
+      border: 1px solid var(--border);
+    }
+
+    .test-layout {
+      display: grid;
+      grid-template-columns: 1.6fr 0.9fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .sticky-column {
+      position: sticky;
+      top: 18px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .test-card {
+      padding: 24px;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .top-left,
+    .top-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      background: #f2f5ff;
+      color: var(--primary-dark);
+    }
+
+    .timer-pill {
+      background: var(--accent-soft);
+      color: #9c551f;
+    }
+
+    .timer-pill.warning {
+      background: var(--warning-soft);
+      color: var(--warning);
+    }
+
+    .timer-pill.critical {
+      background: var(--danger-soft);
+      color: var(--danger);
+    }
+
+    .progress-shell {
+      width: 100%;
+      height: 12px;
+      background: #edf1ff;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #7d8cff, var(--primary));
+      transition: width 0.2s ease;
+    }
+
+    .question-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .question-meta p {
+      font-size: 0.95rem;
+    }
+
+    .question-title {
+      font-size: clamp(1.3rem, 2vw, 1.75rem);
+      margin-bottom: 12px;
+    }
+
+    .question-text {
+      color: var(--text);
+      font-size: 1.08rem;
+      font-weight: 600;
+      line-height: 1.55;
+      margin-bottom: 24px;
+    }
+
+    .katex-display {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 4px 0;
+      margin: 0.85em 0;
+    }
+
+    .option-card .katex-display,
+    .review-content .katex-display {
+      margin: 0.55em 0;
+    }
+
+    .option-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .option-card {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      width: 100%;
+      padding: 16px 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: #fbfcff;
+      color: var(--text);
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.16s ease, background 0.16s ease, transform 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .option-card:hover {
+      border-color: #c9d4ff;
+      transform: translateY(-1px);
+    }
+
+    .option-card.selected {
+      background: #eef2ff;
+      border-color: #aab9ff;
+      box-shadow: 0 10px 22px rgba(91, 108, 255, 0.12);
+    }
+
+    .option-letter {
+      flex-shrink: 0;
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #eef2ff;
+      color: var(--primary-dark);
+      font-weight: 800;
+    }
+
+    .option-card.selected .option-letter {
+      background: linear-gradient(135deg, var(--primary), #8695ff);
+      color: #ffffff;
+    }
+
+    .option-card input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .question-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+    }
+
+    .question-footer p {
+      font-size: 0.94rem;
+    }
+
+    .nav-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .side-card {
+      padding: 22px;
+    }
+
+    .side-card h3 {
+      font-size: 1.12rem;
+      margin-bottom: 10px;
+    }
+
+    .side-card p {
+      font-size: 0.94rem;
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .palette-btn {
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      border-radius: 12px;
+      padding: 10px 0;
+      font-weight: 700;
+      cursor: pointer;
+      transition: border-color 0.16s ease, background 0.16s ease, color 0.16s ease;
+    }
+
+    .palette-btn.current {
+      background: #eef2ff;
+      border-color: #aab9ff;
+      color: var(--primary-dark);
+    }
+
+    .palette-btn.answered {
+      background: var(--success-soft);
+      border-color: #b5e6d0;
+      color: var(--success);
+    }
+
+    .palette-btn.current.answered {
+      box-shadow: inset 0 0 0 2px rgba(91, 108, 255, 0.12);
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .legend-current {
+      background: #aab9ff;
+    }
+
+    .legend-answered {
+      background: #7dd3b0;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .score-card,
+    .topic-card,
+    .summary-card,
+    .review-card {
+      padding: 24px;
+    }
+
+    .score-card {
+      background: var(--panel-strong);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+
+    .score-card strong {
+      display: block;
+      font-size: 2rem;
+      line-height: 1;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .score-card .small {
+      margin-top: 10px;
+      font-size: 0.92rem;
+    }
+
+    .label-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: #eef2ff;
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .topic-card {
+      background: var(--panel-strong);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+
+    .topic-card-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      align-items: flex-start;
+    }
+
+    .topic-card h3 {
+      font-size: 1.02rem;
+    }
+
+    .topic-score {
+      font-size: 0.95rem;
+      color: var(--primary-dark);
+      font-weight: 800;
+    }
+
+    .topic-progress {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: #edf1ff;
+      overflow: hidden;
+      margin: 14px 0 12px;
+    }
+
+    .topic-progress > span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, #8ea0ff, var(--primary));
+      border-radius: inherit;
+    }
+
+    .summary-card,
+    .review-card {
+      margin-top: 24px;
+      background: var(--panel-strong);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+
+    .summary-card h2,
+    .review-card h2 {
+      margin-bottom: 16px;
+      font-size: 1.35rem;
+    }
+
+    .review-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    details.review-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: #fbfcff;
+      overflow: hidden;
+    }
+
+    details.review-item[open] {
+      background: #ffffff;
+    }
+
+    .review-summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .review-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .review-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 0.84rem;
+      font-weight: 800;
+    }
+
+    .status-correct {
+      background: var(--success-soft);
+      color: var(--success);
+    }
+
+    .status-incorrect {
+      background: var(--danger-soft);
+      color: var(--danger);
+    }
+
+    .review-content {
+      padding: 0 18px 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .review-content p {
+      color: var(--muted);
+    }
+
+    .review-content strong {
+      color: var(--text);
+    }
+
+    .results-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .subtle {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .is-hidden {
+      display: none !important;
+    }
+
+    .load-status {
+      margin-top: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .load-status.ready {
+      color: var(--success);
+    }
+
+    .load-status.error {
+      color: var(--danger);
+    }
+
+    .topic-snapshot-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    @media (max-width: 980px) {
+      .welcome-grid,
+      .test-layout,
+      .summary-grid,
+      .topic-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sticky-column {
+        position: static;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .app-shell {
+        width: min(100% - 20px, 1120px);
+        padding-top: 14px;
+      }
+
+      .hero-card,
+      .test-card,
+      .side-card,
+      .summary-card,
+      .review-card,
+      .topic-card,
+      .score-card {
+        padding: 18px;
+      }
+
+      .palette-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .question-footer,
+      .top-bar,
+      .question-meta,
+      .review-summary {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <section id="welcome-screen" class="screen active">
+      <div class="card hero-card">
+        <span class="eyebrow">Grade 10 Mathematics Diagnostic</span>
+        <h1 id="welcome-title" class="hero-title"></h1>
+        <p id="welcome-copy" class="hero-copy"></p>
+
+        <div class="welcome-grid">
+          <div class="panel">
+            <h2>What to expect</h2>
+            <ul class="feature-list" style="margin-top: 16px;">
+              <li class="feature-item">
+                <div>
+                  <strong>Low-pressure practice</strong>
+                  <p>A supportive diagnostic to check Grade 9 to Grade 10 readiness without making the paper feel intimidating.</p>
+                </div>
+                <span class="feature-pill">Supportive</span>
+              </li>
+              <li class="feature-item">
+                <div>
+                  <strong>Balanced 40-question paper</strong>
+                  <p>Each session is assembled from the external CSV bank using fixed area quotas, topic diversity rules, and a staged difficulty flow.</p>
+                </div>
+                <span class="feature-pill">Structured</span>
+              </li>
+              <li class="feature-item">
+                <div>
+                  <strong>Non-calculator</strong>
+                  <p>The challenge comes from reasoning, interpretation, and method choice rather than heavy arithmetic.</p>
+                </div>
+                <span class="feature-pill">1 hour</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="panel">
+            <h2>Balanced Blueprint</h2>
+            <ul id="topic-overview" class="topic-overview-list" style="margin-top: 16px;"></ul>
+            <p id="blueprint-note" class="subtle" style="margin-top: 16px;"></p>
+          </div>
+        </div>
+
+        <div class="actions-row">
+          <button id="start-btn" class="btn btn-primary" type="button" disabled>Loading Question Bank...</button>
+          <button id="preview-btn" class="btn btn-secondary" type="button">See Test Details</button>
+        </div>
+        <p id="load-status" class="subtle load-status">Preparing the GitHub Pages question bank...</p>
+      </div>
+    </section>
+
+    <section id="test-screen" class="screen">
+      <div class="test-layout">
+        <div class="card test-card">
+          <div class="top-bar">
+            <div class="top-left">
+              <span id="question-position-pill" class="pill">Question 1 of 40</span>
+              <span id="topic-pill" class="pill">Area of Knowledge</span>
+            </div>
+            <div class="top-right">
+              <span id="answered-pill" class="pill">0 answered</span>
+              <span id="timer-pill" class="pill timer-pill" aria-live="polite">60:00</span>
+            </div>
+          </div>
+
+          <div class="progress-shell" aria-hidden="true">
+            <div id="progress-bar" class="progress-bar"></div>
+          </div>
+
+          <div class="question-meta">
+            <div>
+              <h2 id="section-title" class="question-title">Balanced Diagnostic Paper</h2>
+              <p id="question-helper">Choose one answer. You can move back and forward at any time.</p>
+            </div>
+            <p id="timer-note">Timer starts when the test begins.</p>
+          </div>
+
+          <div id="question-text" class="question-text"></div>
+          <div id="option-list" class="option-list"></div>
+
+          <div class="question-footer">
+            <p>Your selection is kept during this session. Unanswered questions can be revisited later.</p>
+            <div class="nav-buttons">
+              <button id="prev-btn" class="btn btn-ghost" type="button">Previous</button>
+              <button id="next-btn" class="btn btn-secondary" type="button">Next</button>
+              <button id="submit-btn" class="btn btn-primary" type="button">Finish Test</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="sticky-column">
+          <div class="card side-card">
+            <h3>Question Navigator</h3>
+            <p>Use the buttons below to jump to any question. Green means answered.</p>
+            <div id="palette-grid" class="palette-grid"></div>
+            <div class="legend">
+              <span><i class="legend-dot legend-current"></i> Current</span>
+              <span><i class="legend-dot legend-answered"></i> Answered</span>
+            </div>
+          </div>
+
+          <div class="card side-card">
+            <h3>Quick reminder</h3>
+            <p>This is a diagnostic practice test. The aim is to spot strengths and revision areas, not to be perfect.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="result-screen" class="screen">
+      <div class="card hero-card">
+        <span class="eyebrow">Diagnostic Results</span>
+        <h1 class="hero-title">Practice Review</h1>
+        <p class="hero-copy">Use this result as a starting point for revision. A balanced, supportive diagnosis is more useful than a perfect score.</p>
+
+        <div id="score-summary" class="summary-grid"></div>
+
+        <div class="summary-card">
+          <h2>Area-of-Knowledge Breakdown</h2>
+          <div id="topic-breakdown" class="topic-grid"></div>
+        </div>
+
+        <div class="summary-card">
+          <h2>Topic Snapshot</h2>
+          <div id="topic-snapshot" class="topic-snapshot-list"></div>
+        </div>
+
+        <div class="summary-card">
+          <h2>Overall Assessment Summary</h2>
+          <ul id="overall-summary" class="summary-list"></ul>
+        </div>
+
+        <div class="review-card">
+          <h2>Per-Question Review</h2>
+          <p class="subtle">Open any question below to see the correct answer and a short explanation.</p>
+          <div id="review-list" class="review-list" style="margin-top: 18px;"></div>
+        </div>
+
+        <div class="results-actions">
+          <button id="restart-btn" class="btn btn-primary" type="button">Restart Test</button>
+          <button id="back-to-top-btn" class="btn btn-secondary" type="button">Back to Top</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script>
+    "use strict";
+
+    /* -----------------------------
+       Easy-to-edit configuration
+       ----------------------------- */
+    const CONFIG = {
+      welcomeTitle: "Welcome Bean Hưng...",
+      welcomeMessage:
+        "This mathematics practice test keeps the same calm, encouraging feel while building each paper dynamically from the external question bank. The mix is designed for Grade 9 / MYP diagnostic use, with stronger emphasis on algebra and geometry, broad area coverage, and a staged increase in challenge.",
+      durationMinutes: 60,
+      totalQuestions: 40,
+      bank: {
+        basePath: "Question_bank",
+        hierarchyMapFile: "Question_bank/hierarchy_map.csv",
+        loadConcurrency: 10
+      },
+      selectionBlueprint: {
+        maxPerTopic: 4,
+        maxPerSubTopic: 1,
+        areaBlueprint: [
+          {
+            areaId: "A02",
+            areaName: "Geometry",
+            questionCount: 12,
+            difficultyPlan: { Medium: 5, Hard: 5, Advanced: 2 },
+            note: "Angles, triangles, circles, coordinate methods, and geometric reasoning."
+          },
+          {
+            areaId: "A03",
+            areaName: "Algebra",
+            questionCount: 10,
+            difficultyPlan: { Medium: 3, Hard: 5, Advanced: 2 },
+            note: "Equations, inequalities, quadratics, and symbolic manipulation."
+          },
+          {
+            areaId: "A05",
+            areaName: "Measurement",
+            questionCount: 6,
+            difficultyPlan: { Medium: 2, Hard: 3, Advanced: 1 },
+            note: "Area, volume, surface area, and unit-aware modelling."
+          },
+          {
+            areaId: "A01",
+            areaName: "Logic & Reasoning",
+            questionCount: 4,
+            difficultyPlan: { Medium: 2, Hard: 1, Advanced: 1 },
+            note: "Conjectures, counterexamples, and proof-style thinking."
+          },
+          {
+            areaId: "A04",
+            areaName: "Numbers & Surds",
+            questionCount: 4,
+            difficultyPlan: { Medium: 1, Hard: 2, Advanced: 1 },
+            note: "Exact values, surd manipulation, and number structure."
+          },
+          {
+            areaId: "A06",
+            areaName: "Trigonometry",
+            questionCount: 4,
+            difficultyPlan: { Medium: 1, Hard: 2, Advanced: 1 },
+            note: "SOH CAH TOA and applied right-triangle reasoning."
+          }
+        ],
+        orderingStages: [
+          {
+            label: "Foundation",
+            difficultyPlan: { Medium: 10 },
+            areaPriority: ["A03", "A02", "A05", "A01", "A04", "A06"]
+          },
+          {
+            label: "Core Build",
+            difficultyPlan: { Medium: 4, Hard: 6 },
+            areaPriority: ["A03", "A02", "A05", "A01", "A04", "A06"]
+          },
+          {
+            label: "Reasoning Stretch",
+            difficultyPlan: { Hard: 8, Advanced: 2 },
+            areaPriority: ["A02", "A03", "A05", "A06", "A01", "A04"]
+          },
+          {
+            label: "Final Challenge",
+            difficultyPlan: { Hard: 4, Advanced: 6 },
+            areaPriority: ["A02", "A03", "A06", "A05", "A01", "A04"]
+          }
+        ]
+      },
+      scoringBands: [
+        { min: 85, label: "Strong Start" },
+        { min: 70, label: "Good Foundation" },
+        { min: 55, label: "Review Recommended" },
+        { min: 0, label: "Needs More Practice" }
+      ],
+      minTopicQuestionsForHighlight: 2
+    };
+
+    const AREA_FEEDBACK = {
+      "Logic & Reasoning": {
+        strong: "Pattern spotting, counterexamples, and proof-style thinking look secure.",
+        medium: "There is a workable foundation in reasoning. Short review on counterexamples, conditional statements, and proof structure would help.",
+        low: "Revise logic statements, counterexamples, and the difference between conjecture and proof."
+      },
+      "Geometry": {
+        strong: "Angle facts, shape properties, coordinate methods, and geometric reasoning look strong.",
+        medium: "Some geometric ideas are secure, but more practice with angle chains, triangle reasoning, circles, and line geometry would help.",
+        low: "Revise angle relationships, triangle facts, circle rules, coordinate geometry, and structured geometric reasoning."
+      },
+      "Algebra": {
+        strong: "Equation-solving, manipulation, and symbolic reasoning look secure.",
+        medium: "The algebraic foundation is present, but more practice with multi-step equations, inequalities, and quadratic methods would help.",
+        low: "Revise solving equations, rearranging formulae, simplifying expressions, inequalities, and quadratics."
+      },
+      "Numbers & Surds": {
+        strong: "Exact-value work and surd manipulation look comfortable.",
+        medium: "The core ideas are partly secure. More review on simplifying surds and working in exact form would help.",
+        low: "Revise surd rules, simplifying radicals, and exact-value reasoning."
+      },
+      "Measurement": {
+        strong: "Formula choice, units, and measurement modelling look steady.",
+        medium: "There is some confidence here, but more practice with area, surface area, volume, and composite measurement problems would help.",
+        low: "Revise area, volume, surface area, and unit-aware problem solving."
+      },
+      "Trigonometry": {
+        strong: "Right-triangle ratio work and applied trigonometry look secure.",
+        medium: "The main ideas are starting to settle. Review SOH CAH TOA, angle interpretation, and practical trigonometry contexts.",
+        low: "Revise trigonometric ratios, right-triangle setup, and selecting the correct ratio in context."
+      }
+    };
+
+    const DIFFICULTY_RANK = { Medium: 1, Hard: 2, Advanced: 3 };
+    const OPTION_KEYS = ["A", "B", "C", "D"];
+
+    let hierarchyRows = [];
+    let questionBank = [];
+    let questions = [];
+
+    const state = {
+      currentQuestion: 0,
+      answers: [],
+      remainingSeconds: CONFIG.durationMinutes * 60,
+      timerId: null,
+      started: false,
+      submitted: false,
+      bankLoaded: false,
+      bankLoadError: null,
+      loadingPromise: null,
+      metadata: {
+        fileCount: 0,
+        totalQuestionCount: 0
+      }
+    };
+
+    const elements = {
+      welcomeScreen: document.getElementById("welcome-screen"),
+      testScreen: document.getElementById("test-screen"),
+      resultScreen: document.getElementById("result-screen"),
+      welcomeTitle: document.getElementById("welcome-title"),
+      welcomeCopy: document.getElementById("welcome-copy"),
+      topicOverview: document.getElementById("topic-overview"),
+      blueprintNote: document.getElementById("blueprint-note"),
+      loadStatus: document.getElementById("load-status"),
+      startBtn: document.getElementById("start-btn"),
+      previewBtn: document.getElementById("preview-btn"),
+      questionPositionPill: document.getElementById("question-position-pill"),
+      topicPill: document.getElementById("topic-pill"),
+      answeredPill: document.getElementById("answered-pill"),
+      timerPill: document.getElementById("timer-pill"),
+      progressBar: document.getElementById("progress-bar"),
+      sectionTitle: document.getElementById("section-title"),
+      questionHelper: document.getElementById("question-helper"),
+      timerNote: document.getElementById("timer-note"),
+      questionText: document.getElementById("question-text"),
+      optionList: document.getElementById("option-list"),
+      paletteGrid: document.getElementById("palette-grid"),
+      prevBtn: document.getElementById("prev-btn"),
+      nextBtn: document.getElementById("next-btn"),
+      submitBtn: document.getElementById("submit-btn"),
+      scoreSummary: document.getElementById("score-summary"),
+      topicBreakdown: document.getElementById("topic-breakdown"),
+      topicSnapshot: document.getElementById("topic-snapshot"),
+      overallSummary: document.getElementById("overall-summary"),
+      reviewList: document.getElementById("review-list"),
+      restartBtn: document.getElementById("restart-btn"),
+      backToTopBtn: document.getElementById("back-to-top-btn")
+    };
+
+    function renderMathInContainer(container) {
+      if (!container || typeof renderMathInElement !== "function") {
+        return;
+      }
+
+      renderMathInElement(container, {
+        delimiters: [
+          { left: "\\(", right: "\\)", display: false },
+          { left: "\\[", right: "\\]", display: true }
+        ],
+        throwOnError: false
+      });
+    }
+
+    function escapeHtml(text) {
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function validateBlueprint() {
+      const areaQuestionTotal = CONFIG.selectionBlueprint.areaBlueprint.reduce(
+        (sum, area) => sum + area.questionCount,
+        0
+      );
+      const areaDifficultyTotal = CONFIG.selectionBlueprint.areaBlueprint.reduce(
+        (sum, area) => sum + sumDifficultyPlan(area.difficultyPlan),
+        0
+      );
+      const stageDifficultyTotal = CONFIG.selectionBlueprint.orderingStages.reduce(
+        (sum, stage) => sum + sumDifficultyPlan(stage.difficultyPlan),
+        0
+      );
+
+      if (
+        areaQuestionTotal !== CONFIG.totalQuestions ||
+        areaDifficultyTotal !== CONFIG.totalQuestions ||
+        stageDifficultyTotal !== CONFIG.totalQuestions
+      ) {
+        console.warn("Selection blueprint totals do not add up to 40 questions.");
+      }
+    }
+
+    function initializePage() {
+      validateBlueprint();
+      elements.welcomeTitle.textContent = CONFIG.welcomeTitle;
+      elements.welcomeCopy.textContent = CONFIG.welcomeMessage;
+      renderBlueprintOverview();
+      updateAnsweredCount();
+      updateTimerDisplay();
+      bindEvents();
+      primeQuestionBank();
+    }
+
+    function bindEvents() {
+      elements.startBtn.addEventListener("click", handleStartClick);
+      elements.previewBtn.addEventListener("click", () => {
+        elements.topicOverview.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+
+      elements.prevBtn.addEventListener("click", () => {
+        if (state.currentQuestion > 0) {
+          state.currentQuestion -= 1;
+          renderQuestion();
+          renderPalette();
+        }
+      });
+
+      elements.nextBtn.addEventListener("click", () => {
+        if (state.currentQuestion < questions.length - 1) {
+          state.currentQuestion += 1;
+          renderQuestion();
+          renderPalette();
+        }
+      });
+
+      elements.submitBtn.addEventListener("click", () => submitTest(false));
+      elements.restartBtn.addEventListener("click", resetTest);
+      elements.backToTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    }
+
+    async function handleStartClick() {
+      if (!state.bankLoaded) {
+        try {
+          await primeQuestionBank(true);
+        } catch (error) {
+          return;
+        }
+      }
+
+      startTest();
+    }
+
+    function renderBlueprintOverview() {
+      const areaBlueprint = CONFIG.selectionBlueprint.areaBlueprint;
+      elements.topicOverview.innerHTML = "";
+
+      areaBlueprint.forEach((area) => {
+        const item = document.createElement("li");
+        item.className = "topic-row";
+        item.innerHTML = `
+          <div>
+            <strong>${area.areaName}</strong>
+            <p>${area.note}</p>
+          </div>
+          <span class="topic-count">${area.questionCount} questions</span>
+        `;
+        elements.topicOverview.appendChild(item);
+      });
+
+      const globalDifficultyMix = aggregateDifficultyPlans(
+        areaBlueprint.map((area) => area.difficultyPlan)
+      );
+      elements.blueprintNote.textContent =
+        "Difficulty mix: " + formatDifficultyMix(globalDifficultyMix) +
+        ". Limit: " + CONFIG.selectionBlueprint.maxPerSubTopic +
+        " question per sub-topic and " + CONFIG.selectionBlueprint.maxPerTopic + " per topic.";
+    }
+
+    async function primeQuestionBank(forceReload) {
+      if (state.bankLoaded && !forceReload) {
+        return { hierarchyRows, questionBank };
+      }
+
+      if (state.loadingPromise && !forceReload) {
+        return state.loadingPromise;
+      }
+
+      elements.startBtn.disabled = true;
+      elements.startBtn.textContent = "Loading Question Bank...";
+      state.bankLoadError = null;
+      state.bankLoaded = false;
+
+      if (window.location.protocol === "file:") {
+        elements.startBtn.disabled = false;
+        elements.startBtn.textContent = "GitHub Pages / HTTP Required";
+        updateLoadStatus(
+          "This GitHub-ready version must be served over HTTP/HTTPS. Commit this file together with the Question_bank/ folder to your repository, then open it through GitHub Pages.",
+          "error"
+        );
+        return { hierarchyRows: [], questionBank: [] };
+      }
+
+      updateLoadStatus("Loading hierarchy map and question-bank files...");
+
+      state.loadingPromise = loadQuestionBank()
+        .then((data) => {
+          hierarchyRows = data.hierarchyRows;
+          questionBank = data.questionBank;
+          state.bankLoaded = true;
+          state.metadata.fileCount = hierarchyRows.length;
+          state.metadata.totalQuestionCount = questionBank.length;
+          elements.startBtn.disabled = false;
+          elements.startBtn.textContent = "Start Test";
+          updateLoadStatus(
+            "Question bank ready: " +
+              state.metadata.totalQuestionCount + " questions loaded from " +
+              state.metadata.fileCount + " CSV files.",
+            "ready"
+          );
+          return data;
+        })
+        .catch((error) => {
+          state.bankLoadError = error;
+          elements.startBtn.disabled = false;
+          elements.startBtn.textContent = "Retry Loading";
+          updateLoadStatus(
+            "Could not load the external question bank. Make sure Question_bank/ is committed beside this HTML file in the same GitHub Pages site. Details: " + error.message,
+            "error"
+          );
+          throw error;
+        })
+        .finally(() => {
+          state.loadingPromise = null;
+        });
+
+      return state.loadingPromise;
+    }
+
+    async function loadQuestionBank() {
+      /* GitHub Pages cannot list a folder at runtime.
+         The app uses hierarchy_map.csv as a manifest, then fetches each
+         sub-topic CSV directly in the browser. */
+      const hierarchyData = await fetchCsvRows(CONFIG.bank.hierarchyMapFile);
+      const normalizedHierarchy = hierarchyData.map(normalizeHierarchyRow);
+      let loadedFileCount = 0;
+
+      const questionFileResults = await mapWithConcurrency(
+        normalizedHierarchy,
+        CONFIG.bank.loadConcurrency,
+        async (entry) => {
+          const rows = await fetchCsvRows(CONFIG.bank.basePath + "/" + entry.subTopicId + ".csv");
+          loadedFileCount += 1;
+
+          if (
+            loadedFileCount === normalizedHierarchy.length ||
+            loadedFileCount === 1 ||
+            loadedFileCount % 10 === 0
+          ) {
+            updateLoadStatus(
+              "Loading question files: " + loadedFileCount + " / " + normalizedHierarchy.length + "..."
+            );
+          }
+
+          return rows.map((row) => normalizeQuestionRow(row, entry));
+        }
+      );
+
+      const normalizedQuestions = questionFileResults.flat();
+
+      if (normalizedQuestions.length < CONFIG.totalQuestions) {
+        throw new Error("Not enough questions were loaded to build a 40-question paper.");
+      }
+
+      return {
+        hierarchyRows: normalizedHierarchy,
+        questionBank: normalizedQuestions
+      };
+    }
+
+    async function fetchCsvRows(path) {
+      const response = await fetch(path, { cache: "no-store" });
+
+      if (!response.ok) {
+        throw new Error(path + " returned " + response.status);
+      }
+
+      const text = await response.text();
+      return parseCsvText(text, path);
+    }
+
+    function parseCsvText(text, label) {
+      if (typeof Papa === "undefined") {
+        throw new Error("PapaParse is not available in the page.");
+      }
+
+      const result = Papa.parse(text, {
+        header: true,
+        skipEmptyLines: true
+      });
+
+      if (result.errors && result.errors.length) {
+        throw new Error("CSV parse error in " + label + ": " + result.errors[0].message);
+      }
+
+      return result.data;
+    }
+
+    function normalizeHierarchyRow(row) {
+      return {
+        areaId: (row.area_id || "").trim(),
+        areaName: (row.area_name || "").trim(),
+        topicId: (row.topic_id || "").trim(),
+        topicName: (row.topic_name || "").trim(),
+        subTopicId: (row.sub_topic_id || "").trim(),
+        subTopicName: (row.sub_topic_name || "").trim(),
+        humanNumbering: (row.human_numbering || "").trim()
+      };
+    }
+
+    function normalizeQuestionRow(row, hierarchyEntry) {
+      const optionEntries = OPTION_KEYS
+        .map((key) => ({
+          key,
+          text: String(row["option_" + key.toLowerCase()] || "").trim()
+        }))
+        .filter((entry) => entry.text.length > 0);
+
+      const difficulty = normalizeDifficulty(row.difficulty_level);
+      const correctKey = String(row.correct_answer || "").trim().toUpperCase();
+      let answerIndex = optionEntries.findIndex((entry) => entry.key === correctKey);
+
+      if (answerIndex === -1) {
+        answerIndex = optionEntries.findIndex((entry) => entry.text === String(row.correct_answer || "").trim());
+      }
+
+      if (optionEntries.length < 2 || answerIndex === -1) {
+        throw new Error(
+          "Question row could not be normalized for " +
+            (row.question_id || hierarchyEntry.subTopicId) +
+            ". Check the answer key and options."
+        );
+      }
+
+      return {
+        questionId: String(row.question_id || "").trim(),
+        areaId: String(row.area_id || hierarchyEntry.areaId).trim(),
+        areaName: String(row.area_of_knowledge || hierarchyEntry.areaName).trim(),
+        topicId: String(row.topic_id || hierarchyEntry.topicId).trim(),
+        topicName: String(row.topic || hierarchyEntry.topicName).trim(),
+        subTopicId: String(row.sub_topic_id || hierarchyEntry.subTopicId).trim(),
+        subTopicName: String(row.sub_topic || hierarchyEntry.subTopicName).trim(),
+        humanNumbering: String(row.human_numbering || hierarchyEntry.humanNumbering).trim(),
+        difficulty,
+        difficultyRank: DIFFICULTY_RANK[difficulty] || 99,
+        questionType: String(row.question_type || "MCQ").trim(),
+        text: String(row.question_text || "").trim(),
+        options: optionEntries.map((entry) => entry.text),
+        answer: answerIndex,
+        correctOptionKey: optionEntries[answerIndex].key,
+        explanation: String(row.explanation || "").trim(),
+        tags: String(row.tags || "")
+          .split(";")
+          .map((tag) => tag.trim())
+          .filter(Boolean),
+        sourceLabel: String(row.source_label || "").trim()
+      };
+    }
+
+    function normalizeDifficulty(value) {
+      const normalized = String(value || "").trim().toLowerCase();
+
+      if (normalized === "medium") {
+        return "Medium";
+      }
+      if (normalized === "hard") {
+        return "Hard";
+      }
+      if (normalized === "advanced") {
+        return "Advanced";
+      }
+      return "Medium";
+    }
+
+    function updateLoadStatus(message, tone) {
+      elements.loadStatus.textContent = message;
+      elements.loadStatus.className = "subtle load-status";
+
+      if (tone) {
+        elements.loadStatus.classList.add(tone);
+      }
+    }
+
+    function startTest() {
+      if (state.started || !state.bankLoaded) {
+        return;
+      }
+
+      try {
+        assembleNewPaper();
+      } catch (error) {
+        updateLoadStatus("Paper assembly failed: " + error.message, "error");
+        return;
+      }
+
+      state.started = true;
+      state.submitted = false;
+      showScreen("test");
+      state.remainingSeconds = CONFIG.durationMinutes * 60;
+      updateTimerDisplay();
+
+      state.timerId = window.setInterval(() => {
+        state.remainingSeconds -= 1;
+        updateTimerDisplay();
+
+        if (state.remainingSeconds <= 0) {
+          window.clearInterval(state.timerId);
+          submitTest(true);
+        }
+      }, 1000);
+    }
+
+    function assembleNewPaper() {
+      const selectedQuestions = selectBalancedQuestionSet(questionBank);
+      questions = orderSelectedQuestions(selectedQuestions);
+      state.answers = new Array(questions.length).fill(null);
+      state.currentQuestion = 0;
+      renderPalette();
+      renderQuestion();
+      updateAnsweredCount();
+    }
+
+    function selectBalancedQuestionSet(bank) {
+      const subtopicPools = buildSubtopicPools(bank);
+      const selected = [];
+
+      CONFIG.selectionBlueprint.areaBlueprint.forEach((areaConfig) => {
+        const areaPools = subtopicPools.filter((pool) => pool.areaId === areaConfig.areaId);
+        const chosenPools = chooseSubtopicsForArea(areaPools, areaConfig);
+        const chosenQuestions = materializeAreaQuestions(chosenPools, areaConfig);
+        selected.push(...chosenQuestions);
+      });
+
+      if (selected.length !== CONFIG.totalQuestions) {
+        throw new Error("The selection blueprint did not produce exactly 40 questions.");
+      }
+
+      return selected;
+    }
+
+    function buildSubtopicPools(bank) {
+      const poolMap = new Map();
+
+      bank.forEach((question) => {
+        if (!poolMap.has(question.subTopicId)) {
+          poolMap.set(question.subTopicId, {
+            areaId: question.areaId,
+            areaName: question.areaName,
+            topicId: question.topicId,
+            topicName: question.topicName,
+            subTopicId: question.subTopicId,
+            subTopicName: question.subTopicName,
+            humanNumbering: question.humanNumbering,
+            rowsByDifficulty: { Medium: [], Hard: [], Advanced: [] }
+          });
+        }
+
+        poolMap.get(question.subTopicId).rowsByDifficulty[question.difficulty].push(question);
+      });
+
+      return Array.from(poolMap.values());
+    }
+
+    function chooseSubtopicsForArea(areaPools, areaConfig) {
+      const topicsMap = new Map();
+      const topicUsage = new Map();
+      const selectedIds = new Set();
+      const selectedPools = [];
+
+      areaPools.forEach((pool) => {
+        if (!topicsMap.has(pool.topicId)) {
+          topicsMap.set(pool.topicId, []);
+          topicUsage.set(pool.topicId, 0);
+        }
+        topicsMap.get(pool.topicId).push(pool);
+      });
+
+      Array.from(topicsMap.values()).forEach((list) => shuffleArray(list));
+
+      while (selectedPools.length < areaConfig.questionCount) {
+        let progressMade = false;
+
+        const orderedTopicIds = Array.from(topicsMap.keys()).sort((left, right) => {
+          const usageDiff = (topicUsage.get(left) || 0) - (topicUsage.get(right) || 0);
+          if (usageDiff !== 0) {
+            return usageDiff;
+          }
+          return Math.random() - 0.5;
+        });
+
+        orderedTopicIds.forEach((topicId) => {
+          if (selectedPools.length >= areaConfig.questionCount) {
+            return;
+          }
+
+          if ((topicUsage.get(topicId) || 0) >= CONFIG.selectionBlueprint.maxPerTopic) {
+            return;
+          }
+
+          const availablePool = topicsMap
+            .get(topicId)
+            .find((pool) => !selectedIds.has(pool.subTopicId));
+
+          if (!availablePool) {
+            return;
+          }
+
+          selectedPools.push(availablePool);
+          selectedIds.add(availablePool.subTopicId);
+          topicUsage.set(topicId, (topicUsage.get(topicId) || 0) + 1);
+          progressMade = true;
+        });
+
+        if (!progressMade) {
+          break;
+        }
+      }
+
+      if (selectedPools.length !== areaConfig.questionCount) {
+        throw new Error("Could not satisfy the sub-topic diversity rule for " + areaConfig.areaName + ".");
+      }
+
+      return selectedPools;
+    }
+
+    function materializeAreaQuestions(chosenPools, areaConfig) {
+      const difficultySequence = expandDifficultyPlan(areaConfig.difficultyPlan);
+      const shuffledPools = shuffleArray(chosenPools.slice());
+      const selectedQuestions = [];
+
+      shuffledPools.forEach((pool, index) => {
+        const targetDifficulty = difficultySequence[index];
+        selectedQuestions.push(pickQuestionFromPool(pool, targetDifficulty));
+      });
+
+      return selectedQuestions;
+    }
+
+    function pickQuestionFromPool(pool, targetDifficulty) {
+      const fallbackOrder = ["Medium", "Hard", "Advanced"].sort((left, right) => {
+        return (
+          Math.abs(DIFFICULTY_RANK[left] - DIFFICULTY_RANK[targetDifficulty]) -
+          Math.abs(DIFFICULTY_RANK[right] - DIFFICULTY_RANK[targetDifficulty])
+        );
+      });
+
+      for (const difficulty of [targetDifficulty].concat(fallbackOrder)) {
+        const candidates = pool.rowsByDifficulty[difficulty];
+        if (candidates && candidates.length) {
+          return candidates[Math.floor(Math.random() * candidates.length)];
+        }
+      }
+
+      throw new Error("No questions were available for sub-topic " + pool.subTopicName + ".");
+    }
+
+    function orderSelectedQuestions(selectedQuestions) {
+      const remaining = selectedQuestions.slice();
+      const ordered = [];
+
+      CONFIG.selectionBlueprint.orderingStages.forEach((stage) => {
+        const stageQuestions = [];
+        const previousQuestion = ordered[ordered.length - 1] || null;
+
+        Object.entries(stage.difficultyPlan).forEach(([difficulty, count]) => {
+          const picked = takeBalancedSubset(
+            remaining.filter((question) => question.difficulty === difficulty),
+            count,
+            stage.areaPriority,
+            previousQuestion,
+            stageQuestions
+          );
+
+          picked.forEach((question) => {
+            const index = remaining.findIndex((candidate) => candidate.questionId === question.questionId);
+            if (index !== -1) {
+              remaining.splice(index, 1);
+            }
+          });
+
+          stageQuestions.push(...picked);
+        });
+
+        ordered.push(...arrangeStageQuestions(stageQuestions, stage.areaPriority, ordered[ordered.length - 1] || null));
+      });
+
+      if (ordered.length !== CONFIG.totalQuestions) {
+        throw new Error("Question ordering did not preserve the 40-question paper.");
+      }
+
+      return ordered;
+    }
+
+    function takeBalancedSubset(candidates, count, areaPriority, previousQuestion, alreadyPicked) {
+      if (candidates.length < count) {
+        throw new Error("Not enough " + (candidates[0] ? candidates[0].difficulty : "requested") + " questions for a stage.");
+      }
+
+      const remaining = candidates.slice();
+      const picked = [];
+
+      while (picked.length < count) {
+        const lastQuestion = picked[picked.length - 1] || previousQuestion;
+        const currentPool = picked.concat(alreadyPicked || []);
+        const orderedCandidates = remaining
+          .slice()
+          .sort((left, right) => {
+            return (
+              candidateScore(right, lastQuestion, currentPool, areaPriority) -
+              candidateScore(left, lastQuestion, currentPool, areaPriority)
+            );
+          });
+
+        const chosen = orderedCandidates[0];
+        picked.push(chosen);
+        remaining.splice(remaining.findIndex((item) => item.questionId === chosen.questionId), 1);
+      }
+
+      return picked;
+    }
+
+    function arrangeStageQuestions(stageQuestions, areaPriority, previousQuestion) {
+      const remaining = stageQuestions.slice();
+      const ordered = [];
+
+      while (remaining.length) {
+        const lastQuestion = ordered[ordered.length - 1] || previousQuestion;
+        remaining.sort((left, right) => {
+          return (
+            candidateScore(right, lastQuestion, ordered, areaPriority) -
+            candidateScore(left, lastQuestion, ordered, areaPriority)
+          );
+        });
+        ordered.push(remaining.shift());
+      }
+
+      return ordered;
+    }
+
+    function candidateScore(question, previousQuestion, currentSelection, areaPriority) {
+      const areaUsage = currentSelection.filter((item) => item.areaId === question.areaId).length;
+      const topicUsage = currentSelection.filter((item) => item.topicId === question.topicId).length;
+      let score = 0;
+
+      score += Math.max(0, areaPriority.length - areaPriority.indexOf(question.areaId)) * 4;
+      score -= areaUsage * 4;
+      score -= topicUsage * 5;
+
+      if (previousQuestion) {
+        if (question.areaId !== previousQuestion.areaId) {
+          score += 8;
+        } else {
+          score -= 10;
+        }
+
+        if (question.topicId !== previousQuestion.topicId) {
+          score += 4;
+        } else {
+          score -= 6;
+        }
+      }
+
+      score += Math.random();
+      return score;
+    }
+
+    function renderPalette() {
+      elements.paletteGrid.innerHTML = "";
+
+      questions.forEach((question, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "palette-btn";
+        button.textContent = index + 1;
+
+        if (index === state.currentQuestion) {
+          button.classList.add("current");
+        }
+
+        if (state.answers[index] !== null) {
+          button.classList.add("answered");
+        }
+
+        button.addEventListener("click", () => {
+          state.currentQuestion = index;
+          renderQuestion();
+          renderPalette();
+        });
+
+        elements.paletteGrid.appendChild(button);
+      });
+    }
+
+    /* One-question-at-a-time remains the best fit here:
+       it reduces cognitive load on mobile, keeps the timed paper calmer,
+       and still allows full back/forward navigation. */
+    function renderQuestion() {
+      if (!questions.length) {
+        elements.questionPositionPill.textContent = "Question 0 of 40";
+        elements.topicPill.textContent = "Preparing";
+        elements.sectionTitle.textContent = "Preparing the paper";
+        elements.questionHelper.textContent = "The test paper will appear once the CSV bank has been loaded and selected.";
+        elements.questionText.textContent = "The question paper is being prepared.";
+        elements.optionList.innerHTML = "";
+        elements.progressBar.style.width = "0%";
+        return;
+      }
+
+      const index = state.currentQuestion;
+      const question = questions[index];
+      const selectedAnswer = state.answers[index];
+
+      elements.questionPositionPill.textContent = "Question " + (index + 1) + " of " + questions.length;
+      elements.topicPill.textContent = question.areaName;
+      elements.sectionTitle.textContent = question.topicName;
+      elements.questionHelper.textContent =
+        "Area of Knowledge: " + question.areaName + " · Sub-topic: " + question.subTopicName;
+      elements.questionText.textContent = question.text;
+      elements.progressBar.style.width = (((index + 1) / questions.length) * 100) + "%";
+      elements.prevBtn.disabled = index === 0;
+      elements.nextBtn.disabled = index === questions.length - 1;
+      elements.nextBtn.textContent = index === questions.length - 1 ? "Last Question" : "Next";
+
+      elements.optionList.innerHTML = "";
+
+      question.options.forEach((optionText, optionIndex) => {
+        const label = document.createElement("label");
+        label.className = "option-card" + (selectedAnswer === optionIndex ? " selected" : "");
+
+        const letter = document.createElement("span");
+        letter.className = "option-letter";
+        letter.textContent = String.fromCharCode(65 + optionIndex);
+
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = "question-" + index;
+        input.value = optionIndex;
+        input.checked = selectedAnswer === optionIndex;
+
+        input.addEventListener("change", () => {
+          state.answers[index] = optionIndex;
+          updateAnsweredCount();
+          renderQuestion();
+          renderPalette();
+        });
+
+        const text = document.createElement("div");
+        text.textContent = optionText;
+
+        label.appendChild(input);
+        label.appendChild(letter);
+        label.appendChild(text);
+        elements.optionList.appendChild(label);
+      });
+
+      renderMathInContainer(elements.questionText);
+      renderMathInContainer(elements.optionList);
+    }
+
+    function updateAnsweredCount() {
+      const answered = state.answers.filter((answer) => answer !== null).length;
+      elements.answeredPill.textContent = answered + " answered";
+    }
+
+    function updateTimerDisplay() {
+      elements.timerPill.textContent = formatTime(state.remainingSeconds);
+      elements.timerNote.textContent =
+        CONFIG.durationMinutes + " minutes total. The test submits automatically when the timer reaches zero.";
+      elements.timerPill.classList.remove("warning", "critical");
+
+      if (state.remainingSeconds <= 600) {
+        elements.timerPill.classList.add("critical");
+      } else if (state.remainingSeconds <= 1800) {
+        elements.timerPill.classList.add("warning");
+      }
+    }
+
+    function submitTest(isAutoSubmit) {
+      if (state.submitted || !questions.length) {
+        return;
+      }
+
+      const unanswered = state.answers.filter((answer) => answer === null).length;
+
+      if (!isAutoSubmit && unanswered > 0) {
+        const confirmSubmit = window.confirm(
+          "You still have " + unanswered + " unanswered question" + (unanswered === 1 ? "" : "s") + ". Submit anyway?"
+        );
+
+        if (!confirmSubmit) {
+          return;
+        }
+      }
+
+      state.submitted = true;
+      window.clearInterval(state.timerId);
+      renderResults();
+      showScreen("results");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function renderResults() {
+      const results = calculateResults();
+      renderScoreSummary(results);
+      renderAreaBreakdown(results.areaStats);
+      renderTopicSnapshot(results.topicStats);
+      renderOverallSummary(results);
+      renderReviewList(results.questionResults);
+    }
+
+    function calculateResults() {
+      let totalCorrect = 0;
+
+      const questionResults = questions.map((question, index) => {
+        const selected = state.answers[index];
+        const isCorrect = selected === question.answer;
+
+        if (isCorrect) {
+          totalCorrect += 1;
+        }
+
+        return {
+          number: index + 1,
+          areaId: question.areaId,
+          areaName: question.areaName,
+          topicId: question.topicId,
+          topicName: question.topicName,
+          subTopicId: question.subTopicId,
+          subTopicName: question.subTopicName,
+          difficulty: question.difficulty,
+          questionText: question.text,
+          selected,
+          selectedText: selected !== null ? question.options[selected] : "No answer",
+          correctText: question.options[question.answer],
+          explanation: question.explanation,
+          isCorrect
+        };
+      });
+
+      const percentage = Math.round((totalCorrect / questions.length) * 100);
+      const unanswered = questionResults.filter((result) => result.selected === null).length;
+
+      return {
+        totalCorrect,
+        percentage,
+        label: getPerformanceLabel(percentage),
+        unanswered,
+        questionResults,
+        areaStats: calculateAreaStats(questionResults),
+        topicStats: calculateTopicStats(questionResults)
+      };
+    }
+
+    function calculateAreaStats(questionResults) {
+      return CONFIG.selectionBlueprint.areaBlueprint.map((areaConfig) => {
+        const areaQuestions = questionResults.filter((result) => result.areaId === areaConfig.areaId);
+        const attempted = areaQuestions.filter((result) => result.selected !== null).length;
+        const correct = areaQuestions.filter((result) => result.isCorrect).length;
+        const total = areaQuestions.length;
+        const percentage = total > 0 ? Math.round((correct / total) * 100) : 0;
+        const attemptAccuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+        const topicCount = new Set(areaQuestions.map((result) => result.topicId)).size;
+
+        return {
+          areaId: areaConfig.areaId,
+          areaName: areaConfig.areaName,
+          attempted,
+          correct,
+          total,
+          percentage,
+          attemptAccuracy,
+          topicCount,
+          feedback: getAreaFeedback(areaConfig.areaName, percentage, attempted)
+        };
+      });
+    }
+
+    function calculateTopicStats(questionResults) {
+      const statsMap = new Map();
+
+      questionResults.forEach((result) => {
+        if (!statsMap.has(result.topicId)) {
+          statsMap.set(result.topicId, {
+            topicId: result.topicId,
+            topicName: result.topicName,
+            areaId: result.areaId,
+            areaName: result.areaName,
+            attempted: 0,
+            correct: 0,
+            total: 0
+          });
+        }
+
+        const stat = statsMap.get(result.topicId);
+        stat.total += 1;
+        if (result.selected !== null) {
+          stat.attempted += 1;
+        }
+        if (result.isCorrect) {
+          stat.correct += 1;
+        }
+      });
+
+      return Array.from(statsMap.values())
+        .map((stat) => ({
+          ...stat,
+          percentage: stat.total > 0 ? Math.round((stat.correct / stat.total) * 100) : 0,
+          attemptAccuracy: stat.attempted > 0 ? Math.round((stat.correct / stat.attempted) * 100) : 0
+        }))
+        .sort((left, right) => {
+          const areaDifference = getAreaOrderIndex(left.areaId) - getAreaOrderIndex(right.areaId);
+          if (areaDifference !== 0) {
+            return areaDifference;
+          }
+          if (right.total !== left.total) {
+            return right.total - left.total;
+          }
+          return left.topicName.localeCompare(right.topicName);
+        });
+    }
+
+    function getAreaFeedback(areaName, percentage, attempted) {
+      const feedback = AREA_FEEDBACK[areaName];
+
+      if (attempted === 0) {
+        return "No answers were recorded here, so this area needs another look in the next practice session.";
+      }
+
+      if (percentage >= 80) {
+        return feedback.strong;
+      }
+      if (percentage >= 60) {
+        return feedback.medium;
+      }
+      return feedback.low;
+    }
+
+    function renderScoreSummary(results) {
+      const attempted = questions.length - results.unanswered;
+      elements.scoreSummary.innerHTML = "";
+
+      const cards = [
+        {
+          title: "Total Score",
+          value: results.totalCorrect + " / " + questions.length,
+          description: attempted + " attempted, " + results.unanswered + " unanswered"
+        },
+        {
+          title: "Percentage",
+          value: results.percentage + "%",
+          description: "Overall accuracy across the balanced 40-question paper"
+        },
+        {
+          title: "Performance Label",
+          value: '<span class="label-chip">' + results.label + "</span>",
+          isChip: true,
+          description: "A quick snapshot of present readiness"
+        }
+      ];
+
+      cards.forEach((card) => {
+        const article = document.createElement("article");
+        article.className = "score-card";
+        article.innerHTML = `
+          <p class="subtle">${card.title}</p>
+          ${card.isChip ? card.value : "<strong>" + card.value + "</strong>"}
+          <p class="small">${card.description}</p>
+        `;
+        elements.scoreSummary.appendChild(article);
+      });
+
+      renderMathInContainer(elements.scoreSummary);
+    }
+
+    function renderAreaBreakdown(areaStats) {
+      elements.topicBreakdown.innerHTML = "";
+
+      areaStats.forEach((stat) => {
+        const article = document.createElement("article");
+        article.className = "topic-card";
+        const detailLine =
+          stat.attempted > 0
+            ? stat.topicCount + " topics represented · " + stat.attemptAccuracy + "% accuracy on answered questions"
+            : stat.topicCount + " topics represented · no questions attempted";
+
+        article.innerHTML = `
+          <div class="topic-card-header">
+            <div>
+              <h3>${stat.areaName}</h3>
+              <p>${stat.correct} correct out of ${stat.attempted} attempted</p>
+            </div>
+            <span class="topic-score">${stat.percentage}% of area</span>
+          </div>
+          <div class="topic-progress"><span style="width: ${stat.percentage}%;"></span></div>
+          <p>${stat.feedback}</p>
+          <p class="subtle" style="margin-top: 10px;">${detailLine}</p>
+        `;
+        elements.topicBreakdown.appendChild(article);
+      });
+
+      renderMathInContainer(elements.topicBreakdown);
+    }
+
+    function renderTopicSnapshot(topicStats) {
+      elements.topicSnapshot.innerHTML = "";
+
+      topicStats.forEach((stat) => {
+        const item = document.createElement("div");
+        item.className = "summary-item";
+        item.innerHTML = `
+          <div>
+            <strong>${stat.areaName} · ${stat.topicName}</strong>
+            <p>${stat.correct} correct out of ${stat.attempted} attempted across ${stat.total} selected question${stat.total === 1 ? "" : "s"}</p>
+          </div>
+          <span class="topic-count">${stat.percentage}%</span>
+        `;
+        elements.topicSnapshot.appendChild(item);
+      });
+
+      renderMathInContainer(elements.topicSnapshot);
+    }
+
+    function renderOverallSummary(results) {
+      const summaryItems = buildOverallSummary(results);
+      elements.overallSummary.innerHTML = "";
+
+      summaryItems.forEach((item) => {
+        const li = document.createElement("li");
+        li.className = "summary-item";
+        li.innerHTML = `
+          <div>
+            <strong>${item.title}</strong>
+            <p>${item.text}</p>
+          </div>
+        `;
+        elements.overallSummary.appendChild(li);
+      });
+
+      renderMathInContainer(elements.overallSummary);
+    }
+
+    function buildOverallSummary(results) {
+      const sortedAreas = results.areaStats.slice().sort((left, right) => right.percentage - left.percentage);
+      const strongestAreas = getTiedLabels(sortedAreas, sortedAreas[0].percentage, "areaName");
+      const weakestAreas = getTiedLabels(
+        results.areaStats.slice().sort((left, right) => left.percentage - right.percentage),
+        results.areaStats.slice().sort((left, right) => left.percentage - right.percentage)[0].percentage,
+        "areaName"
+      );
+      const strongestTopic = getHighlightedTopic(results.topicStats, "strong");
+      const weakestTopic = getHighlightedTopic(results.topicStats, "weak");
+      const reviseArea = weakestAreas[0];
+
+      return [
+        {
+          title: "Strongest Areas",
+          text:
+            "The strongest area" +
+            (strongestAreas.length > 1 ? "s appear to be " : " appears to be ") +
+            listLabels(strongestAreas) +
+            ". Keep these skills active with short mixed review."
+        },
+        {
+          title: "Areas to Review Next",
+          text:
+            "The main revision priority is " +
+            listLabels(weakestAreas) +
+            ". " +
+            getRevisionAdvice(reviseArea)
+        },
+        {
+          title: "Topic Snapshot",
+          text:
+            "The strongest selected topic was " +
+            strongestTopic.areaName + " · " + strongestTopic.topicName +
+            ", while the weakest selected topic was " +
+            weakestTopic.areaName + " · " + weakestTopic.topicName + "."
+        },
+        {
+          title: "Assessment View",
+          text: getReadinessMessage(results.percentage, results.unanswered)
+        }
+      ];
+    }
+
+    function getHighlightedTopic(topicStats, mode) {
+      const threshold =
+        topicStats.some((topic) => topic.total >= CONFIG.minTopicQuestionsForHighlight)
+          ? CONFIG.minTopicQuestionsForHighlight
+          : 1;
+
+      const filtered = topicStats.filter((topic) => topic.total >= threshold);
+      const sorted = filtered.sort((left, right) => {
+        if (mode === "strong") {
+          if (right.percentage !== left.percentage) {
+            return right.percentage - left.percentage;
+          }
+        } else {
+          if (left.percentage !== right.percentage) {
+            return left.percentage - right.percentage;
+          }
+        }
+
+        if (right.total !== left.total) {
+          return right.total - left.total;
+        }
+
+        return left.topicName.localeCompare(right.topicName);
+      });
+
+      return sorted[0];
+    }
+
+    function getTiedLabels(stats, targetPercentage, labelKey) {
+      return stats
+        .filter((stat) => Math.abs(stat.percentage - targetPercentage) <= 5)
+        .map((stat) => stat[labelKey]);
+    }
+
+    function listLabels(labels) {
+      if (labels.length === 1) {
+        return labels[0];
+      }
+      if (labels.length === 2) {
+        return labels[0] + " and " + labels[1];
+      }
+      return labels.slice(0, -1).join(", ") + ", and " + labels[labels.length - 1];
+    }
+
+    function getRevisionAdvice(areaName) {
+      const adviceMap = {
+        "Logic & Reasoning":
+          "Revise conjectures, counterexamples, conditional statements, and proof structure.",
+        "Geometry":
+          "Revise angle relationships, line geometry, triangles, circles, and formal geometric reasoning.",
+        "Algebra":
+          "Revise multi-step equations, formula rearrangement, inequalities, and quadratic methods.",
+        "Numbers & Surds":
+          "Revise exact form, simplifying surds, and comparing equivalent representations.",
+        "Measurement":
+          "Revise area, surface area, volume, and selecting formulas carefully in context.",
+        "Trigonometry":
+          "Revise SOH CAH TOA, ratio selection, and practical right-triangle applications."
+      };
+
+      return adviceMap[areaName] || "Revise the main methods and concepts from this area before the next attempt.";
+    }
+
+    function getReadinessMessage(percentage, unanswered) {
+      let message = "";
+
+      if (percentage >= 75) {
+        message =
+          "This suggests a fairly solid starting point for a Grade 10-style assessment. Targeted revision should now focus on precision and consistency across the weaker strands.";
+      } else if (percentage >= 60) {
+        message =
+          "This suggests a workable foundation for a Grade 10-style assessment, but some focused review would be helpful before test day.";
+      } else {
+        message =
+          "This suggests more review is needed before a Grade 10-style assessment. A steady revision plan should begin with the weakest areas and then return to mixed practice.";
+      }
+
+      if (unanswered > 0) {
+        message +=
+          " " +
+          unanswered +
+          " question" +
+          (unanswered === 1 ? " was" : "s were") +
+          " left unanswered, so the score may slightly understate the current level.";
+      }
+
+      return message;
+    }
+
+    function renderReviewList(questionResults) {
+      elements.reviewList.innerHTML = "";
+
+      questionResults.forEach((result) => {
+        const detail = document.createElement("details");
+        detail.className = "review-item";
+
+        const summary = document.createElement("summary");
+        summary.className = "review-summary";
+        summary.innerHTML = `
+          <div class="review-left">
+            <strong>Question ${result.number}</strong>
+            <span class="topic-count">${escapeHtml(result.areaName)}</span>
+            <span class="topic-count">${escapeHtml(result.difficulty)}</span>
+            <span class="status-badge ${result.isCorrect ? "status-correct" : "status-incorrect"}">
+              ${result.isCorrect ? "Correct" : "Incorrect"}
+            </span>
+          </div>
+          <span class="subtle">View review</span>
+        `;
+
+        const content = document.createElement("div");
+        content.className = "review-content";
+        content.innerHTML = `
+          <p><strong>Area:</strong> ${escapeHtml(result.areaName)}</p>
+          <p><strong>Topic:</strong> ${escapeHtml(result.topicName)} · ${escapeHtml(result.subTopicName)}</p>
+          <p><strong>Question:</strong> ${escapeHtml(result.questionText)}</p>
+          <p><strong>Your answer:</strong> ${escapeHtml(result.selectedText)}</p>
+          <p><strong>Correct answer:</strong> ${escapeHtml(result.correctText)}</p>
+          <p><strong>Explanation:</strong> ${escapeHtml(result.explanation)}</p>
+        `;
+
+        detail.appendChild(summary);
+        detail.appendChild(content);
+        elements.reviewList.appendChild(detail);
+      });
+
+      renderMathInContainer(elements.reviewList);
+    }
+
+    function formatTime(totalSeconds) {
+      const safeSeconds = Math.max(0, totalSeconds);
+      const minutes = Math.floor(safeSeconds / 60);
+      const seconds = safeSeconds % 60;
+      return String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
+    }
+
+    function getPerformanceLabel(percentage) {
+      return CONFIG.scoringBands.find((band) => percentage >= band.min).label;
+    }
+
+    function showScreen(screenName) {
+      elements.welcomeScreen.classList.remove("active");
+      elements.testScreen.classList.remove("active");
+      elements.resultScreen.classList.remove("active");
+
+      if (screenName === "test") {
+        elements.testScreen.classList.add("active");
+      } else if (screenName === "results") {
+        elements.resultScreen.classList.add("active");
+      } else {
+        elements.welcomeScreen.classList.add("active");
+      }
+    }
+
+    function resetTest() {
+      window.clearInterval(state.timerId);
+      state.currentQuestion = 0;
+      state.answers = [];
+      state.remainingSeconds = CONFIG.durationMinutes * 60;
+      state.started = false;
+      state.submitted = false;
+      questions = [];
+      renderPalette();
+      renderQuestion();
+      updateAnsweredCount();
+      updateTimerDisplay();
+      showScreen("welcome");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function aggregateDifficultyPlans(plans) {
+      return plans.reduce(
+        (totals, plan) => {
+          Object.entries(plan).forEach(([difficulty, count]) => {
+            totals[difficulty] = (totals[difficulty] || 0) + count;
+          });
+          return totals;
+        },
+        { Medium: 0, Hard: 0, Advanced: 0 }
+      );
+    }
+
+    function formatDifficultyMix(plan) {
+      return ["Medium", "Hard", "Advanced"]
+        .map((difficulty) => plan[difficulty] + " " + difficulty)
+        .join(" · ");
+    }
+
+    function sumDifficultyPlan(plan) {
+      return Object.values(plan).reduce((sum, value) => sum + value, 0);
+    }
+
+    function expandDifficultyPlan(plan) {
+      const result = [];
+      ["Medium", "Hard", "Advanced"].forEach((difficulty) => {
+        for (let index = 0; index < (plan[difficulty] || 0); index += 1) {
+          result.push(difficulty);
+        }
+      });
+      return shuffleArray(result);
+    }
+
+    function shuffleArray(array) {
+      for (let index = array.length - 1; index > 0; index -= 1) {
+        const swapIndex = Math.floor(Math.random() * (index + 1));
+        const temporary = array[index];
+        array[index] = array[swapIndex];
+        array[swapIndex] = temporary;
+      }
+      return array;
+    }
+
+    function getAreaOrderIndex(areaId) {
+      const index = CONFIG.selectionBlueprint.areaBlueprint.findIndex((area) => area.areaId === areaId);
+      return index === -1 ? Number.MAX_SAFE_INTEGER : index;
+    }
+
+    async function mapWithConcurrency(items, limit, mapper) {
+      const results = new Array(items.length);
+      let nextIndex = 0;
+
+      async function worker() {
+        while (nextIndex < items.length) {
+          const currentIndex = nextIndex;
+          nextIndex += 1;
+          results[currentIndex] = await mapper(items[currentIndex], currentIndex);
+        }
+      }
+
+      const workerCount = Math.min(limit, items.length);
+      await Promise.all(Array.from({ length: workerCount }, worker));
+      return results;
+    }
+
+    initializePage();
+  </script>
+</body>
+</html>
